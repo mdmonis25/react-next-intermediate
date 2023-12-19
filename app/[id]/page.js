@@ -1,8 +1,24 @@
-import React from 'react'
+"use client";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const page = () => {
+const page = ({params}) => {
+    const {id} = params;
+
+    const [user, setuser] = useState([]);
+    const getusers = async () => {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/users/" + id
+    );
+    setuser(data);
+  };
+  useEffect(() => {
+    getusers();
+  
+  }, [])
+  
   return (
-    <div>page</div>
+    <div>{ JSON.stringify(user)}</div>
   )
 }
 
